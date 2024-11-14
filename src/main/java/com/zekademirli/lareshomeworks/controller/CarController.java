@@ -1,5 +1,6 @@
 package com.zekademirli.lareshomeworks.controller;
 
+import com.zekademirli.lareshomeworks.dto.CarDTO;
 import com.zekademirli.lareshomeworks.entity.Car;
 import com.zekademirli.lareshomeworks.service.CarService;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +27,7 @@ public class CarController {
     }
 
     @PostMapping
-    public void createCar(@RequestBody Car car) {
+    public void createCar(@RequestBody CarDTO car) {
         carService.createCar(car);
     }
 
