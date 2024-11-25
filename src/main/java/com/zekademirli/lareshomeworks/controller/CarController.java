@@ -1,7 +1,8 @@
 package com.zekademirli.lareshomeworks.controller;
 
-import com.zekademirli.lareshomeworks.dto.CarDTO;
-import com.zekademirli.lareshomeworks.entity.Car;
+import com.zekademirli.lareshomeworks.request.CreateCarRequest;
+import com.zekademirli.lareshomeworks.request.UpdateCarRequest;
+import com.zekademirli.lareshomeworks.response.CarResponse;
 import com.zekademirli.lareshomeworks.service.CarService;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,22 +18,22 @@ public class CarController {
     }
 
     @GetMapping
-    public List<Car> getAllCars() {
+    public List<CarResponse> getAllCars() {
         return carService.getAllCars();
     }
 
     @GetMapping("/{id}")
-    public Car getCarById(@PathVariable Long id) {
+    public CarResponse getCarById(@PathVariable Long id) {
         return carService.getCarById(id);
     }
 
     @PostMapping
-    public void createCar(@RequestBody CarDTO car) {
+    public void createCar(@RequestBody CreateCarRequest car) {
         carService.createCar(car);
     }
 
     @PutMapping("/{id}")
-    public void updateCar(@PathVariable Long id, @RequestBody Car car) {
+    public void updateCar(@PathVariable Long id, @RequestBody UpdateCarRequest car) {
         carService.updateCar(id, car);
     }
 
