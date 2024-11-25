@@ -1,6 +1,7 @@
 package com.zekademirli.lareshomeworks.service;
 
 import com.zekademirli.lareshomeworks.entity.Customer;
+import com.zekademirli.lareshomeworks.exception.ResourceNotFoundException;
 import com.zekademirli.lareshomeworks.repository.CustomerRepository;
 import com.zekademirli.lareshomeworks.request.CreateCustomerRequest;
 import com.zekademirli.lareshomeworks.request.UpdateCustomerRequest;
@@ -37,12 +38,14 @@ public class CustomerService {
     }
 
     public CustomerResponse updateCustomer(Long id, UpdateCustomerRequest updatedCustomer) {
+
         Customer customer = customerRepository.findById(id).orElse(null);
+        if (customer == null) {
+            throw new ResourceNotFoundException("Customer not found");
+        }
         modelMapper.map(updatedCustomer, customer);
         Customer savedCustomer = null;
-        if (customer != null) {
-            savedCustomer = customerRepository.save(customer);
-        }
+        savedCustomer = customerRepository.save(customer);
         return modelMapper.map(savedCustomer, CustomerResponse.class);
     }
 
