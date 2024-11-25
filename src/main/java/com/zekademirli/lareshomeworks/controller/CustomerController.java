@@ -1,6 +1,8 @@
 package com.zekademirli.lareshomeworks.controller;
 
-import com.zekademirli.lareshomeworks.entity.Customer;
+import com.zekademirli.lareshomeworks.request.CreateCustomerRequest;
+import com.zekademirli.lareshomeworks.request.UpdateCustomerRequest;
+import com.zekademirli.lareshomeworks.response.CustomerResponse;
 import com.zekademirli.lareshomeworks.service.CustomerService;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,22 +20,22 @@ public class CustomerController {
     }
 
     @GetMapping
-    public List<Customer> getCustomers() {
+    public List<CustomerResponse> getCustomers() {
         return customerService.getAllCustomers();
     }
 
     @GetMapping("/{id}")
-    public Optional<Customer> getCustomerById(@PathVariable Long id) {
+    public Optional<CustomerResponse> getCustomerById(@PathVariable Long id) {
         return customerService.getCustomerById(id);
     }
 
     @PostMapping
-    public Customer createCustomer(@RequestBody Customer customer) {
+    public CustomerResponse createCustomer(@RequestBody CreateCustomerRequest customer) {
         return customerService.createCustomer(customer);
     }
 
     @PutMapping("/{id}")
-    public Customer updateCustomer(@PathVariable Long id, @RequestBody Customer customer) {
+    public CustomerResponse updateCustomer(@PathVariable Long id, @RequestBody UpdateCustomerRequest customer) {
         return customerService.updateCustomer(id, customer);
     }
 
